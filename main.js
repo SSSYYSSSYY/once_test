@@ -1,100 +1,27 @@
-const mealList = [
-    {
-        "name": "食在一方",
-        "category": ["brunch"],
-        "filter": false
-    },
-    {
-        "name": "日十",
-        "category": ["brunch"],
-        "filter": false
-    },
-    {
-        "name": "鹽行站",
-        "category": ["buffet", "rice"],
-        "filter": false
-    },
-    {
-        "name": "鍋燒意麵",
-        "category": ["noodle"],
-        "filter": false
-    },
-    {
-        "name": "炒飯",
-        "category": ["rice"],
-        "filter": false
-    },
-    {
-        "name": "八方雲集",
-        "category": ["others"],
-        "filter": false
-    },
-    {
-        "name": "火鍋",
-        "category": ["others"],
-        "filter": false
-    },
-    {
-        "name": "韓式料理",
-        "category": ["rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "小飯糰大飯糰",
-        "category": ["rice"],
-        "filter": false
-    },
-    {
-        "name": "後校門滷肉飯",
-        "category": ["rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "魚耶",
-        "category": ["brunch", "rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "吳家鴨香飯",
-        "category": ["rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "施家雞肉飯",
-        "category": ["rice"],
-        "filter": false
-    },
-    {
-        "name": "黑盤",
-        "category": ["rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "神武拉麵",
-        "category": ["noodle"],
-        "filter": false
-    },
-    {
-        "name": "森井丼飯",
-        "category": ["rice"],
-        "filter": false
-    },
-    {
-        "name": "雙醬咖哩",
-        "category": ["rice"],
-        "filter": false
-    },
-    {
-        "name": "麺や青鈴",
-        "category": ["noodle"],
-        "filter": false
-    },
-    {
-        "name": "金拱門",
-        "category": ["noodle", "rice"],
-        "filter": false
-    }
-];
+// JSON格式的key值，一定要寫成字串
+//引入外部的JSON資料至這個main.js中，
+//需要使用非同步的方式「fetch」
+
+let mealList = [];
+console.log("抓資料前")
+fetch("mealList.json")
+    .then(res => res.json())//既定格式，背起來即可，注意.json()的括號為必須
+    .then(data => {
+        //在這裡處理fetch來的資料
+        // console.log("抓完資料了");
+        // console.log(data); //確保.then()中的程式碼，一定是確定抓到資料後才執行
+        //就算在這裡把data賦值給mealList陣列，在此區塊外還是會顯示是空陣列
+        //因為fetch()和其他程式碼的執行環境不同
+        //所以需要用到這個data的所有程式碼，
+        //都要寫在這裡面
+
+        mealList = data;
+        console.log(mealList);
+
+    })
+    
+
+// console.log("抓資料後")
 
 //先把各個會需要操作到的元素抓進來
 const brunch = document.getElementById("brunch");
@@ -113,6 +40,10 @@ let resultArr = [];
 let noRepeatResult = [];
 
 let counter = 0;
+
+//fetch和EventListener在同一個執行環境
+//因此在EventListener內可以使用到fetch到的資料
+//而且也因為fetch資料速度一定比使用者的速度還快
 
 btn.addEventListener("click", () =>{
     mealTypeArr.forEach(item =>{
