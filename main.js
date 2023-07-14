@@ -174,7 +174,7 @@ function randomMeal(){
         // console.log(mealList[random].name);
         // console.log("沒勾選任何東西");
         result.innerText = mealList[random].name;
-        console.log("貓貓");
+        // console.log("貓貓");
     }
 }
 
